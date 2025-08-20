@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Welcome to your CV optimiser</h1>
+<form action='/optimise' method='post' enctype="multipart/form-data">
+    <label for="cv_file">Upload your CV (PDF):</label><br>
+    <input type="file" name="cv_file" accept="application/pdf" required><br><br>
+
+    <label for="job_desc">Enter your Job Description:</label><br>
+    <textarea name="job_desc" style="width:80%; height: 150px;" required></textarea><br><br>
+
+    <input type="submit" value="Optimise">
+</form>
+
+</body>
+</html>
