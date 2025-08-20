@@ -13,5 +13,10 @@
     <input type="submit" value="Optimise">
 </form>
 
+{% if result %}
+    <h2>Optimised CV Output:</h2>
+    <pre>{{ result }}</pre>
+{% endif %}
+
 </body>
 </html>
