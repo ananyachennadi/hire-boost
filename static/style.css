@@ -1,0 +1,35 @@
+* {
+  background-color: #131824;
+  color: #ffffff;
+  font-family:roboto;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0 10px 0;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.title2{
+  color: #3c80ff;
+}
+
+h1{
+  font-size:50px;
+  margin: 0px;
+}
+
+.tagline{
+  text-align: center;
+  margin: 10px auto;
+  font-size: 18px;
+  font-weight: 400;
+  color: #d1d5db;
+}

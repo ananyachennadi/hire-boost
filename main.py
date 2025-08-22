@@ -12,8 +12,8 @@ def optimise():
     cv_file = request.files.get('cv_file')
     file_bytes = cv_file.read()
     job_desc = request.form.get('job_desc')
-    result = optimise_cv(file_bytes, job_desc)
-    return render_template("index.html", result=result)
+    result = optimise_cv(job_desc, file_bytes)
+    return render_template('index.html', result=result)
 
 if __name__ == "__main__":
     app.run(debug=True)
