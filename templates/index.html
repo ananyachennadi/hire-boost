@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     </head>
 
     <body>
@@ -22,7 +23,7 @@
 
         <p class="tagline">Optimise your CV to match the job listing</p>
         
-        <form action='/optimise' method='post' enctype="multipart/form-data" class="form">
+        <form id="optimise-form" enctype="multipart/form-data" class="form">
             
             <label id="drop-area">
                 <input type="file" name="cv_file" accept="application/pdf" required >
@@ -42,10 +43,8 @@
             </div>
         </form>
 
-        {% if result %}
-            <h2>Optimised CV Output:</h2>
-            <pre>{{ result }}</pre>
-        {% endif %}
+        <div id="result-output"></div>
+
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     </body>
 </html>

@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const dropArea = document.getElementById('drop-area');
   const fileInput = document.querySelector('#drop-area input[type="file"]');
+  const form = document.getElementById('optimise-form'); // New: Get a reference to the form
+  const resultDiv = document.getElementById('result-output'); // New: Get a reference to the output div
 
   // Prevent default behavior for drag and drop
   ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -50,4 +52,50 @@ document.addEventListener('DOMContentLoaded', () => {
       dropArea.classList.add('file-added');
     }
   }
+
+  form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // Stop the form from submitting normally
+      
+      const formData = new FormData(form);
+      
+      try {
+          // Show a loading state
+          resultDiv.innerHTML = '<p>Optimising your CV...</p>';
+
+          const response = await fetch('/optimise', {
+              method: 'POST',
+              body: formData
+          });
+
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          
+          if (data.result) {
+              // Clear the loading message
+              resultDiv.innerHTML = ''; 
+
+              // Create a heading
+              const heading = document.createElement('h2');
+              heading.textContent = 'Optimised CV Output:';
+              resultDiv.appendChild(heading);
+
+              // Parse and inject the Markdown
+              const parsedMarkdown = marked.parse(data.result);
+              const contentDiv = document.createElement('div');
+              contentDiv.innerHTML = parsedMarkdown;
+              resultDiv.appendChild(contentDiv);
+
+          } else {
+              resultDiv.innerHTML = '<p>No result was returned.</p>';
+          }
+
+      } catch (error) {
+          console.error('Error:', error);
+          resultDiv.innerHTML = '<p>An error occurred. Please try again.</p>';
+      }
+  });
+
 });
