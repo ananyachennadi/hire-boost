@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     </head>
 
@@ -20,13 +21,18 @@
         </div>
         <p class="tagline">Optimise your CV to match the job listing</p>
         <form action='/optimise' method='post' enctype="multipart/form-data">
-            <label class="file-upload-label" for="cv_file">Drag & drop your CV (PDF) here or click to upload</label><br>
-            <input type="file" name="cv_file" accept="application/pdf" required ><br><br>
+            <label id="drop-area" for="cv_file">
+                Drag & drop your CV (PDF) here or click to upload
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <input type="file" name="cv_file" accept="application/pdf" required >
+            </label><br>
+            <br><br>
 
             <label for="job_desc">Enter your Job Description:</label><br>
             <textarea name="job_desc" style="width:80%; height: 150px;" required></textarea><br><br>
-
-            <input type="submit" value="Optimise">
+            <div class="submit-area">
+                <input type="submit" value="Optimise CV" class="submit-button">
+            </div>
         </form>
 
         {% if result %}
