@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const dropArea = document.getElementById('drop-area');
   const fileInput = document.querySelector('#drop-area input[type="file"]');
-  const form = document.getElementById('optimise-form'); // New: Get a reference to the form
-  const resultDiv = document.getElementById('result-output'); // New: Get a reference to the output div
+  const form = document.getElementById('optimise-form'); // Get a reference to the form
+  const resultDiv = document.getElementById('result-output'); // Get a reference to the output div
 
   // Prevent default behavior for drag and drop
   ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
