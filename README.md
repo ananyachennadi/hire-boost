@@ -80,6 +80,7 @@ To run **HireBoost** on your machine, just follow these steps.
 ## Future Improvements
 - [ ] Add a nicer loading state
 - [ ] Implement a download option for the optimised CV
+- [ ] Send a push notification when the results have loaded
 
 ---
 ## Contact
@@ -93,5 +94,6 @@ If you have any questions or want to connect, feel free to reach out to me!
 This project is licensed under the **MIT License**.
 
 For more information, see the `LICENSE` file in the repository.
+
 
 
