@@ -1,11 +1,12 @@
 import os
 from flask import Flask, render_template, request, jsonify
 from api.llm_client import optimise_cv
+from werkzeug.exceptions import RequestEntityTooLarge # Import RequestEntityTooLarge
 
 app = Flask(__name__)
 
-# Set a file size limit (e.g., 2 MB)
-app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024 
+# Set a file size limit (e.g., 1 MB for free tiers to prevent memory issues)
+app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024 
 
 # Triggered when the user navigates to the base URL
 @app.route('/')
@@ -44,3 +45,9 @@ def optimise():
         # Log the error for debugging purposes
         print(f"An error occurred: {e}")
         return jsonify({'error': 'An error occurred. Please try again.'}), 500
+
+# Error handler for files exceeding the MAX_CONTENT_LENGTH
+@app.errorhandler(RequestEntityTooLarge)
+def handle_file_size_limit(error):
+    # This message will be returned when a file larger than 1MB is uploaded
+    return "The CV file is too large. Please upload a PDF under 1 MB.", 413
