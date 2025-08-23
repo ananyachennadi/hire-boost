@@ -1,9 +1,12 @@
+import os
 from flask import Flask, render_template, request, jsonify
 from api.llm_client import optimise_cv
 
 app = Flask(__name__)
 
-# Define the route for the home page
+# Set a file size limit (e.g., 2 MB)
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024 
+
 # Triggered when the user navigates to the base URL
 @app.route('/')
 def index():
@@ -12,12 +15,32 @@ def index():
 # This route only accepts POST requests from the form submission.
 @app.route('/optimise', methods=['POST'])
 def optimise():
-    # Extract the uploaded CV file from the request.
-    cv_file = request.files.get('cv_file')
-    file_bytes = cv_file.read()
+    # Basic input validation
+    if 'cv_file' not in request.files or not request.form.get('job_desc'):
+        return jsonify({'error': 'Missing CV file or job description.'}), 400
 
-    # Extract the job description from the form. 
+    cv_file = request.files.get('cv_file')
     job_desc = request.form.get('job_desc')
     
-    result = optimise_cv(job_desc, file_bytes)
-    return jsonify({'result': result}) 
+    # Check for empty file
+    if cv_file.filename == '':
+        return jsonify({'error': 'No file selected.'}), 400
+
+    try:
+        # Check file extension
+        if not cv_file.filename.endswith('.pdf'):
+            return jsonify({'error': 'Invalid file type. Please upload a PDF.'}), 400
+        
+        # Read the file's content into memory. This is okay after size validation.
+        file_bytes = cv_file.read()
+
+        # Call the external function to process the data
+        result = optimise_cv(job_desc, file_bytes)
+
+        # Return the success response
+        return jsonify({'result': result})
+
+    except Exception as e:
+        # Log the error for debugging purposes
+        print(f"An error occurred: {e}")
+        return jsonify({'error': 'An error occurred. Please try again.'}), 500
