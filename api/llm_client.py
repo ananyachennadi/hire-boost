@@ -22,8 +22,8 @@ def optimise_cv(job_desc, file_bytes):
     GOOD: "Optimised database queries, reduced load times by 67%"
     Analysis format:
     - The CV they uploaded with the optimisations to all of the sections, like the optimisations shown in the exmaple, ensuring the format of the CV is kept the same as the one they have uploaded. 
-    Match score: x/100
-    Missing keywords: 3-5 key terms from job description
+    Relevance score: x/100
+    Missing keywords: Ranked list of keywords missing from the CV that the job description repeats (3-5 of them)
     Strengths: 2-3 existing strong points
     Improvements: 3 specific changes to make
     '''
