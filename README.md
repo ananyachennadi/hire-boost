@@ -24,6 +24,8 @@ Stop wasting hours tweaking your CV for every job. Let AI do the hard work so yo
 
 See a full walkthrough of the application below.
 
+![HireBoost App Demo](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2lnbnp1aThuZXNzbmJiNjA3NnZyYm5lMzFta2N1cnZjZWp5OGl0NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pe2DQ23sNxFMb6yRrz/giphy.gif)
+
 
 **Try the app live on Render!**
 * [https://hire-boost.onrender.com/]
@@ -91,4 +93,5 @@ If you have any questions or want to connect, feel free to reach out to me!
 This project is licensed under the **MIT License**.
 
 For more information, see the `LICENSE` file in the repository.
+
 
