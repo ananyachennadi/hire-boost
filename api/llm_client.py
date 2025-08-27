@@ -2,7 +2,6 @@ from google import genai
 from google.genai import types
 import os
 from dotenv import load_dotenv
-from flask import Flask
 
 def optimise_cv(job_desc, file_bytes):
     load_dotenv()

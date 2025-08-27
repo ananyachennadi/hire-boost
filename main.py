@@ -1,11 +1,10 @@
-import os
 from flask import Flask, render_template, request, jsonify
 from api.llm_client import optimise_cv
 from werkzeug.exceptions import RequestEntityTooLarge # Import RequestEntityTooLarge
 
 app = Flask(__name__)
 
-# Set a file size limit (e.g., 1 MB for free tiers to prevent memory issues)
+# 1MB file size limit to prevent memory issues
 app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024 
 
 # Triggered when the user navigates to the base URL

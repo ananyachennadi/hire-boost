@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+  // get references to important elements
   const dropArea = document.getElementById('drop-area');
   const fileInput = document.querySelector('#drop-area input[type="file"]');
-  const form = document.getElementById('optimise-form'); // Get a reference to the form
-  const resultDiv = document.getElementById('result-output'); // Get a reference to the output div
+  const form = document.getElementById('optimise-form'); 
+  const resultDiv = document.getElementById('result-output');
+  const submitButton = form.querySelector('.submit-button'); 
 
   // Prevent default behavior for drag and drop
   ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -49,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const fileName = files[0].name;
       const uploadText = document.querySelector('.upload-text');
       uploadText.textContent = `${fileName} is ready to be optimised!`;
-      dropArea.classList.add('file-added');
     }
   }
 
@@ -59,8 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(form);
       
       try {
-          // Show a loading state
+          // Show a loading state and disable submit button to stop spaming requests
           resultDiv.innerHTML = '<p>Optimising your CV...</p>';
+          submitButton.disabled = true;
+          submitButton.textContent = "Optimising...";
 
           const response = await fetch('/optimise', {
               method: 'POST',
@@ -95,6 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (error) {
           console.error('Error:', error);
           resultDiv.innerHTML = '<p>An error occurred. Please try again.</p>';
+      } finally {
+        // button re-enabled after finishing
+        submitButton.disabled = false;
       }
   });
 
