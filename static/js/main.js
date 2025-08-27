@@ -106,9 +106,4 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   });
 
-    <footer>
-        <p><a href="privacy.html">Privacy Policy</a></p>
-    </footer>
-
-
 });
