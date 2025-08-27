@@ -144,3 +144,8 @@ h1{
   display: flex;
   justify-content: center;
 }
+
+.checkbox{
+    width: 70%;
+    font-size: 15px;
+}
