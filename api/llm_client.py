@@ -3,12 +3,13 @@ from google.genai import types
 import os
 from dotenv import load_dotenv
 
-def optimise_cv(job_desc, file_bytes):
-    load_dotenv()
-    API_KEY = os.getenv("GEMINI_API_KEY")
+load_dotenv()
+API_KEY = os.getenv("GEMINI_API_KEY")
 
-    # set up the client with the key
-    client = genai.Client(api_key=API_KEY)
+# set up the client with the key
+client = genai.Client(api_key=API_KEY)
+
+def optimise_cv(job_desc, file_bytes):
 
     # this is the prompt that tells the ai what to do
     prompt = '''
