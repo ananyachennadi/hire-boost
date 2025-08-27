@@ -1,15 +1,14 @@
-from google import genai
-from google.genai import types
 import os
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
 
 # set up the client with the key
-client = genai.Client(api_key=API_KEY)
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-def optimise_cv(job_desc, file_bytes):
+def optimise_cv(job_desc, file_path):
 
     # this is the prompt that tells the ai what to do
     prompt = '''
@@ -28,15 +27,15 @@ def optimise_cv(job_desc, file_bytes):
     Improvements: 3 specific changes to make
     '''
 
+    uploaded_file = genai.upload_file(path=file_path)
+
     # send the file and prompt the ai and get a response
-    response = client.models.generate_content(
-        model="gemini-2.5-flash", 
+    response = genai.GenerativeModel("gemini-1.5-flash").generate_content(
         contents=[
-        types.Part.from_bytes(
-            data=file_bytes,
-            mime_type='application/pdf',
-        ),
-        prompt, job_desc],
+            uploaded_file,
+            prompt,
+            job_desc
+        ],
     )
 
     # return the text from the response
