@@ -30,7 +30,7 @@ def optimise():
 
     # Create a temporary file to save the CV
     temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.pdf')
-    temp_file.close() # <-- Must close the handle to save the file
+    temp_file.close() 
     
     try:
         # Check file extension

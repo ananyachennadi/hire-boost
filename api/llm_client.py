@@ -6,7 +6,7 @@ load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
 
 # set up the client with the key
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+genai.configure(api_key=API_KEY)
 
 def optimise_cv(job_desc, file_path):
 
