@@ -59,11 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault(); // Stop the form from submitting normally
       
       const formData = new FormData(form);
+
       submitButton.disabled = true;
-      submitButton.textContent = "Optimising...";
+      submitButton.value = "Optimising...";
       
       try {
-          // Show a loading state and disable submit button to stop spaming requests
+          // Show a loading state
           resultDiv.innerHTML = '<p>Optimising your CV...</p>';
 
           const response = await fetch('/optimise', {
