@@ -60,4 +60,4 @@ def optimise():
 @app.errorhandler(RequestEntityTooLarge)
 def handle_file_size_limit(error):
     # This message will be returned when a file larger than 1MB is uploaded
-    return "The CV file is too large. Please upload a PDF under 1 MB.", 413
+    return "The CV file is too large. Please upload a PDF under 1 MB.", 413 

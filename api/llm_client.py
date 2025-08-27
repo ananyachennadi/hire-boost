@@ -39,4 +39,4 @@ def optimise_cv(job_desc, file_path):
     )
 
     # return the text from the response
-    return(response.text)
+    return(response.text) 
