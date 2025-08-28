@@ -1,5 +1,5 @@
 * {
-  background-color: #131824;
+  background-color: #050b18;
   color: #ffffff;
   font-family:roboto;
 }
@@ -135,7 +135,7 @@ h1{
 }
 
 .submit-button:hover{
-  background-color: #131824;
+  background-color: #050b18;
   cursor: pointer;
   border-color:#3b80fe;
 }

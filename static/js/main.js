@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const notificationText = document.getElementById('notification-text');
   const dropArea = document.getElementById('drop-area');
   const fileInput = document.querySelector('#drop-area input[type="file"]');
+  const loadingScreen = document.getElementById('loading-screen');
+  const mainContent = document.getElementById('main-content-wrapper');
 
   //store the original page title
   const originalTitle = document.title;
@@ -89,10 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const formData = new FormData(form);
 
-      // Set loading state and hide any previous notifications
-      resultDiv.innerHTML = '<p>Optimising your CV...</p>';
+      // hide any previous notifications
+      // Show loading screen and hide main content
+      loadingScreen.classList.remove('hidden-loading');
+      mainContent.classList.add('hidden-loading');
       submitButton.disabled = true;
-      submitButton.textContent = 'Optimising...'; // Change button text
+      resultDiv.innerHTML = '';
       hideNotification();
 
       try {
@@ -112,9 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
             showNotification("Optimised CV successfully generated", true);
             // change title on success
             document.title = 'Ready! ✅'
-
-              // Clear the loading message
-              resultDiv.innerHTML = ''; 
 
               // Create a heading
               const heading = document.createElement('h2');
@@ -144,7 +145,9 @@ document.addEventListener('DOMContentLoaded', () => {
       } finally {
         // button re-enabled after finishing
         submitButton.disabled = false;
-        submitButton.textContent = 'Optimise CV'; // Restore button text
+        // Hide loading screen and show main content
+        loadingScreen.classList.add('hidden-loading');
+        mainContent.classList.remove('hidden-loading');
       }
   });
 
