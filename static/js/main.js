@@ -1,12 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // get references to important elements
+  const form = document.getElementById('optimise-form');
+  const resultDiv = document.getElementById('result-output');
+  const submitButton = form.querySelector('.submit-button');
+  const notificationBar = document.getElementById('notification-bar');
+  const notificationIcon = document.getElementById('notification-icon');
+  const notificationText = document.getElementById('notification-text');
   const dropArea = document.getElementById('drop-area');
   const fileInput = document.querySelector('#drop-area input[type="file"]');
-  const form = document.getElementById('optimise-form'); 
-  const resultDiv = document.getElementById('result-output');
-  const submitButton = form.querySelector('.submit-button'); 
 
+  //store the original page title
+  const originalTitle = document.title;
+  
   // Prevent default behavior for drag and drop
   ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
     dropArea.addEventListener(eventName, preventDefaults, false);
@@ -55,18 +61,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // function that shows notification and message based on the result
+  function showNotification(message, isSuccess) {
+        notificationText.innerHTML = message;
+        
+        if (isSuccess) {
+            notificationIcon.innerHTML = '<i class="fa-solid fa-check"></i>';
+        } else {
+            notificationIcon.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        }
+        
+        notificationBar.style.display = 'flex';
+    }
+
+     // Function to hide the notification
+    function hideNotification() {
+        notificationBar.style.display = 'none';
+    }
+
+  //reset the title when the user focuses on the tab again
+  window.addEventListener('focus', () => {
+      document.title = originalTitle;
+  });
+
   form.addEventListener('submit', async (e) => {
-      e.preventDefault(); // Stop the form from submitting normally
+      e.preventDefault();
       
       const formData = new FormData(form);
 
+      // Set loading state and hide any previous notifications
+      resultDiv.innerHTML = '<p>Optimising your CV...</p>';
       submitButton.disabled = true;
-      submitButton.value = "Optimising...";
-      
-      try {
-          // Show a loading state
-          resultDiv.innerHTML = '<p>Optimising your CV...</p>';
+      submitButton.textContent = 'Optimising...'; // Change button text
+      hideNotification();
 
+      try {
           const response = await fetch('/optimise', {
               method: 'POST',
               body: formData
@@ -79,6 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const data = await response.json();
           
           if (data.result) {
+            //success: api returned a result
+            showNotification("Optimised CV successfully generated", true);
+            // change title on success
+            document.title = 'Ready! ✅'
+
               // Clear the loading message
               resultDiv.innerHTML = ''; 
 
@@ -94,15 +128,23 @@ document.addEventListener('DOMContentLoaded', () => {
               resultDiv.appendChild(contentDiv);
 
           } else {
+            // failure: api returned an empty result
+            showNotification('An error occured: No result was returned', false);
               resultDiv.innerHTML = '<p>No result was returned.</p>';
+            //Change title on failure
+            document.title = 'Failed! ❌';
           }
 
       } catch (error) {
           console.error('Error:', error);
           resultDiv.innerHTML = '<p>An error occurred. Please try again.</p>';
+          showNotification('An error occurred. Please try again', false);
+          //Change title on error
+          document.title = 'Failed! ❌'
       } finally {
         // button re-enabled after finishing
         submitButton.disabled = false;
+        submitButton.textContent = 'Optimise CV'; // Restore button text
       }
   });
 
