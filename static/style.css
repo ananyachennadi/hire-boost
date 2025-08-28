@@ -199,7 +199,10 @@ h1{
 }
 
 .hidden-loading{
-  display: flex;
+  display: none;
+}
+
+#loading-screen {
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -210,7 +213,7 @@ h1{
   justify-self: center;
   margin-top: 40px;
   height: 340px;
-  display: none;
+  display: flex;
 }
 
 .spinner, .loading-heading, .loading-desc {
@@ -231,8 +234,12 @@ h1{
   padding-left: 30px;
   padding-right: 30px;
   color: #d1d5db;
+  text-align: center;
 }
 
+#main-content-wrapper.hidden-loading {
+  display: none !important;
+}
 
 .spinner {
   width: 60px;
