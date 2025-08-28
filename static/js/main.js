@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // function that shows notification and message based on the result
   function showNotification(message, isSuccess) {
-        notificationText.innerHTML = message;
+        notificationText.textContent = message;
         
         if (isSuccess) {
             notificationIcon.innerHTML = '<i class="fa-solid fa-check"></i>';
