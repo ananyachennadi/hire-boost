@@ -193,3 +193,61 @@ h1{
   background-color: #1853c4;
   font-size: 23px;
 }
+
+.hidden-loading{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #101624;
+  border: 2px solid #262a37;
+  border-radius: 10px;
+  width: 70%;
+  justify-self: center;
+  margin-top: 40px;
+  height: 340px;
+  display: none;
+}
+
+.spinner, .loading-heading, .loading-desc {
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  background-color: #101624;
+}
+
+.loading-heading{
+  font-size: 24px;
+  padding: 15px;
+  margin: 10px;
+}
+
+.loading-desc{
+  margin: 0;
+  padding-left: 30px;
+  padding-right: 30px;
+  color: #d1d5db;
+}
+
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #3b80fe 180deg, 
+    rgba(59, 128, 254, 0.5) 90deg,
+    rgba(59, 128, 254, 0) 0deg, 
+    transparent 360deg 
+  );
+  mask: radial-gradient(farthest-side, transparent 80%, black 81%);
+  -webkit-mask: radial-gradient(farthest-side, transparent 80%, black 81%);
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
