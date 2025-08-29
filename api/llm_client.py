@@ -68,7 +68,7 @@ Improvements: 3 specific high-impact changes to consider
     uploaded_file = genai.upload_file(path=file_path)
 
     # send the file and prompt the ai and get a response
-    response = genai.GenerativeModel("gemini-1.5-flash").generate_content(
+    response = genai.GenerativeModel("gemini-2.5-flash").generate_content(
         contents=[
             uploaded_file,
             prompt,
