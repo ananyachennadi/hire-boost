@@ -37,7 +37,7 @@ See a full walkthrough of the application below.
 * **Frontend:** HTML, CSS, JavaScript
 * **Backend:** Python, Flask
 * **Deployment:** Render, Git, GitHub
-* **APIs:** Google Generative AI (gemini-2.5-flash)
+* **APIs:** Google Generative AI (gemini-1.5-flash)
 
 ---
 
@@ -94,6 +94,7 @@ If you have any questions or want to connect, feel free to reach out to me!
 This project is licensed under the **MIT License**.
 
 For more information, see the `LICENSE` file in the repository.
+
 
 
 
